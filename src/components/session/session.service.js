@@ -32,6 +32,8 @@ class SessionService {
     getToday = () => this.repository.getToday();
   
     addEndDate = () => this.repository.addEndDate();
+
+    stats = () => this.repository.stats();
   }
   
   export default SessionService;

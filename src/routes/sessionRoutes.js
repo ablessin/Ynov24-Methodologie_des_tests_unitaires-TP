@@ -210,5 +210,91 @@ router.post('/user/create', verifyToken, userController.createUser.bind(userCont
  */
 router.post('/user/create', verifyToken, userController.createUser.bind(userController));
 
+//with token
+/**
+ * 
+ * /**
+ * @openapi
+ * /api/session/today/:
+ *   get:
+ *     summary: Récupère la durée restante pour la session du jour
+ *     tags:
+ *       - Gestion de session
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 description: L'email de connexion.
+ *               
+ *             required:
+ *               - email
+ */
+router.post('/user/create', verifyToken, userController.createUser.bind(userController));
+
+//with token
+/**
+ * 
+ * /**
+ * @openapi
+ * /api/session/endDate:
+ *   put:
+ *     summary: Add an endDate for a session
+ *     tags:
+ *       - Gestion de session
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               sessionId:
+ *                 type: string
+ *                 description: l'id de session
+ *               endDate:
+ *                 type: date
+ *                 description: La date de fin
+ *               
+ *             required:
+ *               - sessionId
+ *               - endDate
+ */
+router.post('/user/create', verifyToken, userController.createUser.bind(userController));
+
+//with token
+/**
+ * 
+ * /**
+ * @openapi
+ * /api/session/stats:
+ *   get:
+ *     summary: Récupère des stats sur les sessions
+ *     tags:
+ *       - Gestion de session
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 description: L'email de connexion. 
+ *             required:
+ *               - email
+ */
+router.post('/user/create', verifyToken, userController.createUser.bind(userController));
 
 module.exports = router;
