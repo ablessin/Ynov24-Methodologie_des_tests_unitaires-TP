@@ -83,3 +83,5 @@ Get one user by id.
   PORT=4200
   ``
 * Do not forget to whitelist IP
+
+mongodb+srv://usertp:<password>@cluster0.sro5s4i.mongodb.net/
