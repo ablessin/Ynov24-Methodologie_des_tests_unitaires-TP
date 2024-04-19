@@ -80,8 +80,35 @@ class SessionController {
       throw new console.error("Temps dépassé");
     }
     
-
     return res.status(200).send({ estimation: dateEndPotentiel })
+  }
+
+  stats = async (req, res) => {
+    const { email } = req.body;
+    const user = this.userRepository.getByEmail(email)
+
+    const sessions = this.repository.getByUserId(user.id)
+    let duration = []
+
+    for (let i = 0; i < sessions.length; i++) {
+      const session = sessions[i]
+    
+      if (session.end) {
+        const diff = session.end.diff(session.start, ["hours"])
+        duration.push(diff)
+      }
+    }
+
+    const sum = duration.reduce((partialSum, a) => partialSum + a, 0);
+    const moyenne = sum / duration.length
+    const max = Math.max(duration)
+    const min = Math.min(duration)
+
+    return res.status(200).send({
+      moyenne,
+      max,
+      min
+    })
   }
 }
 
