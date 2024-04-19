@@ -28,7 +28,10 @@ class SessionService {
     deleteSessionById = (id) => this.repository.deleteById(id);
   
     deleteSession = () => this.repository.deleteAll();
+
+    getToday = () => this.repository.getToday();
   
+    addEndDate = () => this.repository.addEndDate();
   }
   
   export default SessionService;

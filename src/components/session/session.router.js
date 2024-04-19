@@ -14,6 +14,7 @@ class SessionRouter {
     router.route('/').put(this.sessionController.updateSession);
     router.route('/').delete(this.sessionController.deleteSessions);
     router.route('/today').get(this.sessionController.getToday);
+    router.route('/endDate').put(this.sessionController.addEndDate)
     return router;
   }
 }
