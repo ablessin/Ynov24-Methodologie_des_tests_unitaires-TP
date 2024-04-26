@@ -12,7 +12,8 @@ class SessionRepository {
         return Session.fromDocument(await this.collection.findOne(query));
     }
 
-    async getByUserId(userId) {
+
+    async getSessionByUserId(userId) {
         return Session.fromDocument(await this.collection.find({ "userid": userId }));
     }
 

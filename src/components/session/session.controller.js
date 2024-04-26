@@ -9,7 +9,7 @@ class SessionController {
   }
 
   createSession = async (req, res) => {
-    this.sessionService.addSession(new Session(req.body.start, req.body.end, req.body.pause, req.body.userId, req.body.id))
+    this.sessionService.addSession(new Session(req.body.start, null, 0, req.body.userId, req.body.id))
         .then(createdSession => res.status(201).send(createdSession.toJSON()))
         .catch(err => res.status(403).send(err.message))
   };
@@ -53,8 +53,10 @@ class SessionController {
 
     const date = luxon.DateTime.now()
     const user = this.userRepository.getByEmail(email)
+    if (!user) res.status(404).send({ message: "non trouvé" })
 
     const sessions = this.repository.getByUserId(user.id)
+    if (!sessions) res.status(404).send({ message: "non trouvé" })
     let duration = 0
 
     for (let i = 0; i < sessions.length; i++) {
@@ -62,10 +64,10 @@ class SessionController {
       if (session.start.startOf("day") == date.startOf("day")) {
         if (session.end) {
           const diff = session.end.diff(session.start, ["hours"])
-          duration = duration + diff
+          duration = duration + diff - session?.pause
         } else {
           const diff = date.diff(session.start, ["hours"])
-          duration = duration + diff
+          duration = duration + diff - session?.pause
         }
       }
     }
@@ -86,8 +88,9 @@ class SessionController {
   stats = async (req, res) => {
     const { email } = req.body;
     const user = this.userRepository.getByEmail(email)
-
+    if (!user) res.status(404).send({ message: "non trouvé" })
     const sessions = this.repository.getByUserId(user.id)
+    if (!sessions) res.status(404).send({ message: "non trouvé" })
     let duration = []
 
     for (let i = 0; i < sessions.length; i++) {
@@ -104,10 +107,22 @@ class SessionController {
     const max = Math.max(duration)
     const min = Math.min(duration)
 
+    function numMedian(a) {
+      a = a.slice(0).sort(function(x, y) {
+        return x - y;
+      });
+      var l = a.length,
+          b = (l + 1) / 2;
+      return (l % 2) ? a[b - 1] : (a[b - 1.5] + a[b - 0.5]) / 2;
+    }
+
+    const mediane = numMedian(duration)
+    
     return res.status(200).send({
-      moyenne,
-      max,
-      min
+      moyenne: moyenne,
+      max: max,
+      min: min,
+      mediane: mediane
     })
   }
 }
