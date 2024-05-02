@@ -1,5 +1,4 @@
 import Session from './session.entities.js';
-import e from "express";
 
 class SessionController {
   constructor(sessionService, userRepository, repository) {
@@ -9,7 +8,7 @@ class SessionController {
   }
 
   createSession = async (req, res) => {
-    this.sessionService.addSession(new Session(req.body.start, null, 0, req.body.userId, req.body.id))
+    this.sessionService.addSession(new Session(req.body.start, req.body.end, req.body.pause, req.body.userId))
         .then(createdSession => res.status(201).send(createdSession.toJSON()))
         .catch(err => res.status(403).send(err.message))
   };
@@ -22,8 +21,9 @@ class SessionController {
 
   getSessions = async (_, res) => {
     const sessions = await this.sessionService.getSessions();
-    const sessionsJSON = sessions.map(session => session.toJSON());
-    res.status(200).send(sessionsJSON);
+    console.log('24', sessions)
+    // const sessionsJSON = sessions.map(session => session.toJSON());
+    res.status(200).send(sessions);
   };
 
   getSessionById = async (req, res) => {

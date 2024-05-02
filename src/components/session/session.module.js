@@ -5,10 +5,10 @@ import SessionRepository from "./session.repository.js";
 import UserRepository from '../user/user.repository.js';
 
 const sessionRepository = new SessionRepository();
+const userRepository = new UserRepository();
 const sessionService = new SessionService(sessionRepository);
-const sessionController = new SessionController(sessionService);
+const sessionController = new SessionController(sessionService, userRepository);
 const sessionRouter = new SessionRouter(sessionController);
-const userRepository = new UserRepository()
 
 export default {
   service: sessionService,

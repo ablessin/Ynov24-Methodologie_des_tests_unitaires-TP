@@ -1,3 +1,5 @@
+import { DateTime } from "luxon";
+
 class SessionService {
    UserRepository = this.userRepository
     constructor(repository, userRepository) {
@@ -6,20 +8,38 @@ class SessionService {
     }
   
     addSession = async (session) => {
-      if (!session.start.isValid) throw new Error('Date invalid');
-      const user = this.userRepository.getUserById(session.userId)
+      const startDateTime = DateTime.fromISO(session.start);
+      if (!startDateTime) throw new Error('Date invalid');
+      const user = await this.userRepository.getById(session.userId)
       if (!user) throw new Error('User does not exists');
-      const sessions = this.repository.getSessionByUserId(user._id)
+      console.log('15', user._id)
+      const sessions = await this.repository.getSessionByUserId(user._id.toString())
+      console.log("ses", sessions)
+      const sessionStart = DateTime.fromISO(session.start);
+      const sessionEnd = session.end ? DateTime.fromISO(session.end) : null;
+      
       sessions.map(x => {
-        if (x?.end > session.start) throw new Error('Session deja existante sur cette période');
-        if (x.start > session.start && !x.end) throw new Error('Session deja existante sur cette période');
+        const xStart = DateTime.fromISO(x.start);
+        const xEnd = x.end ? DateTime.fromISO(x.end) : null;
+
+        // Vérifiez si la session actuelle chevauche une session existante
+        if ((xEnd && xEnd > sessionStart) || (sessionEnd && sessionEnd > xStart)) {
+          throw new Error('Session déjà existante sur cette période');
+        }
+
+        // Vérifiez si la session existante chevauche la session actuelle (inverse de la vérification précédente)
+        if ((sessionEnd && sessionEnd > xStart) || (xEnd && xEnd > sessionStart)) {
+          throw new Error('Session déjà existante sur cette période');
+        }
+
+        if (!xEnd)  throw new Error('Session déjà en cours');
       })
       return this.repository.create(session);
     };
   
     updateSession = async (session) => {
       if (!session.end.isValid) throw new Error('Date invalid');
-      const user = this.userRepository.getUserById(session.userId)
+      const user = this.userRepository.getById(session.userId)
       if (!user) throw new Error('User does not exists');
       
       const findSession = await this.getSessionById(session._id);
@@ -32,17 +52,19 @@ class SessionService {
     };
   
   
-    getSession = async () => {
+    getSessions = async () => {
       const sessions = await this.repository.getAll();
 
-      sessions.map(async x => {
-        const user = this.userRepository.getUserById(x.userId)
+      const values = Promise.all(sessions.map(async x => {
+        const user = await this.userRepository.getById(x.userId)
         if (!user) throw new Error('User does not exists');
         return {
           ...x,
-          user
+          pause: x.pause || 0
         }
-      })
+      }))
+      console.log(values)
+      return await values
     }
   
     getSessionById = async (id) => {
