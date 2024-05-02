@@ -17,6 +17,7 @@ class User {
   }
 
   static fromDocument(doc) {
+    console.log(doc)
     return new User(doc.email, doc.password, doc.age, doc._id);
   }
 }

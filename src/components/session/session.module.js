@@ -6,7 +6,7 @@ import UserRepository from '../user/user.repository.js';
 
 const sessionRepository = new SessionRepository();
 const userRepository = new UserRepository();
-const sessionService = new SessionService(sessionRepository);
+const sessionService = new SessionService(sessionRepository, userRepository);
 const sessionController = new SessionController(sessionService, userRepository);
 const sessionRouter = new SessionRouter(sessionController);
 

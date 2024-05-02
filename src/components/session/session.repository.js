@@ -14,7 +14,9 @@ class SessionRepository {
 
 
     async getSessionByUserId(userId) {
-        return Session.fromDocument(await this.collection.find({ "userid": userId }));
+        const documents = await this.collection.find({ "userId": userId }).toArray();
+        console.log('ff', documents)
+        return documents.map(doc => Session.fromDocument(doc));
     }
 
     getAll = async () => {
