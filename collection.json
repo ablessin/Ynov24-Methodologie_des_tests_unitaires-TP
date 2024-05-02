@@ -1,0 +1,312 @@
+{
+	"info": {
+		"_postman_id": "43c3572d-f392-4fe0-9c9d-db2cd5c0c8de",
+		"name": "Test Unitaire",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18503618"
+	},
+	"item": [
+		{
+			"name": "127.0.0.1:4200/users",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"test@test.fr\",\r\n    \"password\":\"123azerty\",\r\n    \"age\":\"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:4200/users",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "4200",
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "test@test.fr",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "123azerty",
+							"disabled": true
+						},
+						{
+							"key": "age",
+							"value": "10",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "127.0.0.1:4200/users/663386f77724829a6c03dd46",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":\"663386f77724829a6c03dd46\",\r\n    \"email\":\"toto@gmail.com\",\r\n    \"password\":\"azerty321\",\r\n    \"age\":\"11\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:4200/users",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "4200",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "127.0.0.1:4200/users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:4200/users/66338dccc2aca8380ac21300",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "4200",
+					"path": [
+						"users",
+						"66338dccc2aca8380ac21300"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "127.0.0.1:4200/users",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:4200/users",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "4200",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "127.0.0.1:4200/users/66338dccc2aca8380ac21300",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:4200/users/66338dccc2aca8380ac21300",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "4200",
+					"path": [
+						"users",
+						"66338dccc2aca8380ac21300"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "127.0.0.1:4200/users/66338dccc2aca8380ac21300",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:4200/users/66338dccc2aca8380ac21300",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "4200",
+					"path": [
+						"users",
+						"66338dccc2aca8380ac21300"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "127.0.0.1:4200/session",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"start\":\"2024-05-02T13:56:00.000Z\",\r\n    \"userId\":\"66338dccc2aca8380ac21300\"\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:4200/session",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "4200",
+					"path": [
+						"session"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "127.0.0.1:4200/session",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":\"\",\r\n    \"start\":\"2024-05-02T13:56:00.000Z\",\r\n    \"end\":\"2024-05-02T14:56:00.000Z\",\r\n    \"pause\":null,\r\n    \"userId\":\"66338dccc2aca8380ac21300\"\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:4200/session",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "4200",
+					"path": [
+						"session"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "127.0.0.1:4200/session/66338dccc2aca8380ac21300",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:4200/session/66338dccc2aca8380ac21300",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "4200",
+					"path": [
+						"session",
+						"66338dccc2aca8380ac21300"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "127.0.0.1:4200/session/66338dccc2aca8380ac21300",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:4200/session/66338dccc2aca8380ac21300",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "4200",
+					"path": [
+						"session",
+						"66338dccc2aca8380ac21300"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "127.0.0.1:4200/session/today",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"body\":\"toto@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:4200/session/today",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "4200",
+					"path": [
+						"session",
+						"today"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
